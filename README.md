@@ -10,4 +10,4 @@ The user can:
   - Deposit assets into a fund
   - Withdraw assets from a fund
   - Transfer assets between funds (can be funds owned by a single client or transfers between clients)
-  - Display the history of all transactions for a client account or for a single fund.
+  - Display the history of all transactions for a client account/fund
