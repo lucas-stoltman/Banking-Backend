@@ -4,7 +4,7 @@
 # CSS 340 A, Dimpsey
 # Version: 1.0
 
-from accounts import Accounts
+from account import Account
 
 # 1) The program will read in a string of transactions from a file into an in-memory queue.
 # TODO read input file
