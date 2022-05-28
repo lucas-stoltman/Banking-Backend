@@ -4,10 +4,10 @@ class CommandReader:
 
     _input = ""
 
-    def __init__(self, ):
+    def __init__(self):
         self._input = open("BankTransIn.txt", "r")
 
     def print(self):
-        print(self._input)
+        print(self._input.read())
 
 

@@ -2,6 +2,7 @@
 
 from account import Account
 from fund import Fund
+from command_reader import CommandReader
 
 acc = Account()
 
@@ -22,3 +23,8 @@ fund1.display()
 # custom
 fund2 = Fund(acc.get_number(), 3, 69)
 fund2.display()
+
+print("\n-------------------------------")
+
+cmd = CommandReader()
+cmd.print()
