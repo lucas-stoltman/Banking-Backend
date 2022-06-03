@@ -29,4 +29,4 @@ print("\n-------------------------------")
 cmd = CommandStorage()
 
 for i in range(cmd.get_size()):
-    print(cmd.next_command())
+    print(cmd.get_command())

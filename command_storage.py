@@ -3,7 +3,6 @@ class CommandStorage:
     import queue
 
     _file = open("BankTransIn.txt", "r")
-    _lines_list = [""]
     _q = queue.SimpleQueue()
     _size = 0
 
@@ -12,30 +11,21 @@ class CommandStorage:
         # open file
         self._file = open("BankTransIn.txt", "r")
         # read lines
-        self._lines_list = self._file.readlines()
+        lines = self._file.readlines()
         # remove newline characters
-        self.clean()
+        for i in range(len(lines)):
+            lines[i] = lines[i].strip("\n")
         # put into the queue
-        for i in range(len(self._lines_list)):
-            self._q.put(self._lines_list[i])
+        for i in range(len(lines)):
+            self._q.put(lines[i])
         # set number of commands in the queue
         self._size = self._q.qsize()
-
-    # remove newline characters
-    def clean(self):
-        for i in range(len(self._lines_list)):
-            self._lines_list[i] = self._lines_list[i].strip("\n")
 
     def get_size(self):
         return self._size
 
-    def next_command(self):
+    def get_command(self):
         if self._q.empty():
-            return "No commands left"
+            return "Empty"
         else:
             return self._q.get()
-
-    def print(self):
-        for i in range(self._q.qsize()):
-            print(self._q.get())
-
