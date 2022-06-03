@@ -3,6 +3,7 @@ class CommandStorage:
     import queue
 
     _file = open("BankTransIn.txt", "r")
+    # commands are stored in a queue
     _q = queue.SimpleQueue()
     _size = 0
 
