@@ -27,4 +27,6 @@ fund2.display()
 print("\n-------------------------------")
 
 cmd = CommandStorage()
-cmd.print()
+
+for i in range(cmd.get_size()):
+    print(cmd.next_command())
