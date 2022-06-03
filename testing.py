@@ -3,6 +3,7 @@
 from account import Account
 from fund import Fund
 from command_storage import CommandStorage
+from transaction import Transaction
 
 acc = Account()
 
@@ -27,6 +28,9 @@ fund2.display()
 print("\n-------------------------------")
 
 cmd = CommandStorage()
+transaction = Transaction()
 
 for i in range(cmd.get_size()):
-    print(cmd.get_command())
+    transaction.parse(cmd.get_command())
+    transaction.print_command()
+
