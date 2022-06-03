@@ -2,7 +2,7 @@
 
 from account import Account
 from fund import Fund
-from command_reader import CommandReader
+from command_storage import CommandStorage
 
 acc = Account()
 
@@ -26,5 +26,5 @@ fund2.display()
 
 print("\n-------------------------------")
 
-cmd = CommandReader()
+cmd = CommandStorage()
 cmd.print()
