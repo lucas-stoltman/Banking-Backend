@@ -24,7 +24,7 @@ class Transaction:
             self._last_name = self._command[1]
             self._first_name = self._command[2]
             if len(self._command[3]) > 4:
-                print("Account numbers must only be four digits.")
+                print("Account numbers may only be four digits.\n Example: 1234")
             else:
                 self._account_number = self._command[3]
         # opening an account is the only command that has letters
@@ -57,9 +57,44 @@ class Transaction:
                 print("History")
                 self._account_number = self._command[1]
 
-    # performs the transaction
-    def transact(self, command: string = ""):
-        self.parse(command)
+    # # TODO performs the transaction
+    # def transact(self, command: string = ""):
+    #     self.parse(command)
+    #
+    #     if self._command_type == "O":
+    #         # TODO create new account object
+    #         # TODO add to the BST
+    #
+    #     if self._command_type == "D":
+    #         # TODO locate account in BST
+    #         # TODO increase amount by self._amount
+    #
+    #     if self._command_type == "W":
+    #         # TODO locate account in BST
+    #         if account.amount > self.amount:
+    #             # TODO decrease amount by self._amount
+    #         else:
+    #             print("You do not have enough funds.")
+    #
+    #     if self._command_type == "T":
+    #         # TODO locate account in BST
+    #         # TODO locate account2 in BST
+    #         if account.amount > self.amount:
+    #             # TODO decrease amount by self._amount
+    #             # TODO increase account2 by self._amount
+    #         else:
+    #             # handling shared money market fund overdraws
+    #             if account.amount > self.amount:
+    #                 # TODO decrease self._amount by amount
+    #                 # TODO set amount to $0
+    #                 # TODO decrease OTHER MM fund amount by self._amount
+    #                 # TODO increase account2 by self._amount
+    #             else:
+    #                 print("You do not have enough funds.")
+    #
+    #     if self._command_type == "H":
+    #         # TODO print history
+    #         print(f"Transaction History for {self._first_name} {self._last_name} by fund.")
 
     # only for debug purposes
     def print_debug(self):
