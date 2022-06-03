@@ -28,9 +28,10 @@ fund2.display()
 print("\n-------------------------------")
 
 cmd = CommandStorage()
-transaction = Transaction()
 
 for i in range(cmd.get_size()):
+    transaction = Transaction()
     transaction.parse(cmd.get_command())
-    transaction.print_command()
+    transaction.print_debug()
+    print("\n")
 
