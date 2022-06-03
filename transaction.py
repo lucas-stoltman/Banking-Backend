@@ -12,8 +12,8 @@ class Transaction:
     _first_name = None
     _amount = 0
 
-    # TODO error handling goes in here
-    # Reads and stores the values
+    # Reads and stores the values'
+    # error handling goes in here
     def parse(self, command: string = ""):
         # break the string into a list
         self._command = command.split()
@@ -23,12 +23,20 @@ class Transaction:
             print("Open")
             self._last_name = self._command[1]
             self._first_name = self._command[2]
-            self._account_number = self._command[3]
+            if len(self._command[3]) > 4:
+                print("Account numbers must only be four digits.")
+            else:
+                self._account_number = self._command[3]
         # opening an account is the only command that has letters
         else:
             account_number_long = self._command[1]
-            self._account_number = account_number_long[:-1]
-            self._account_type = account_number_long[-1:]
+            if len(account_number_long) > 5:
+                print("Account number is too long.")
+            if len(account_number_long) == 5:
+                self._account_number = account_number_long[0:4]
+                self._account_type = account_number_long[4]
+            else:
+                self._account_number = account_number_long
 
             if self._command_type == "D":
                 print("Deposit")
