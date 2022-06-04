@@ -11,7 +11,7 @@ class Transaction:
         self._fund2_type = None
         self._last_name = None
         self._first_name = None
-        self._amount = 0
+        self._amount = float(0)
 
     # Reads and stores the values'
     # error handling goes in here
@@ -39,11 +39,11 @@ class Transaction:
                 self._account_number = account_number_long
 
             if self._command_type == "D":
-                self._amount = self._command[2]
+                self._amount = float(self._command[2])
             elif self._command_type == "W":
-                self._amount = self._command[2]
+                self._amount = float(self._command[2])
             elif self._command_type == "T":
-                self._amount = self._command[2]
+                self._amount = float(self._command[2])
                 account2_number_long = self._command[3]
                 self._account2_number = account2_number_long[:-1]
                 self._fund2_type = account2_number_long[-1:]
@@ -56,6 +56,7 @@ class Transaction:
     def transact(self, command: string):
         import main
         from account import Account
+        from fund import Fund
         from account_storage import Node, BST
 
         self.parse(command)
@@ -66,39 +67,59 @@ class Transaction:
             node = Node(account.get_number(), account)
             # add to the BST
             main.storage.put(node.key, node)
-            print(f"\tOpened an account for {self._first_name} {self._last_name} ({self._account_number})")
+            # print(f"\tOpened an account for {self._first_name} {self._last_name} ({self._account_number})")
 
-        # if self._command_type == "D":
-        #     # TODO locate account in BST
-        #     account = main.storage.get(self._account_number)
-        #     print("!", account)
-        #     # TODO if fund not found, open fund
-        #     if not account.find_fund():
-        #         new_fund = Fund(account.get_number, self._fund_type, self._amount)
-        #         # TODO increase account.fund.amount by transaction._amount
-        #
-        # if self._command_type == "W":
-        #     # TODO locate account in BST
-        #     if account.amount > self.amount:
-        #         # TODO decrease account.amount by transaction._amount
-        #     else:
-        #         print("You do not have enough funds.")
-        #
-        # if self._command_type == "T":
-        #     # TODO locate account in BST
-        #     # TODO locate account2 in BST
-        #     if account.amount > self.amount:
-        #         # TODO decrease account.amount by transaction._amount
-        #         # TODO increase account2.amount by transaction._amount
-        #     else:
-        #         # handling shared money market fund overdraws
-        #         if account.amount > self.amount:
-        #             # TODO decrease transaction._amount by account.amount
-        #             # TODO set account.amount to $0
-        #             # TODO decrease OTHER MM fund account.amount by self._amount
-        #             # TODO increase account2.amount by self._amount
-        #         else:
-        #             print("You do not have enough funds.")
+        if self._command_type == "D":
+            # locate account in BST
+            account = main.storage.get(int(self._account_number)).value
+            # if fund not found, open fund
+            if not account.find_fund(self._fund_type):
+                new_fund = Fund(account.get_number, self._fund_type, self._amount)
+                # increase account.fund.amount by transaction._amount
+                account.add_fund(new_fund)
+                # print(f"\tAdded ${self._amount} to fund {self._fund_type}")
+                return True
+            else:
+                # increase fund by self._amount
+                fund = account.get_fund(self._fund_type)
+                fund += self._amount
+                # print(f"\tAdded ${self._amount}")
+                return True
+
+        if self._command_type == "W":
+            #  locate account in BST
+            account = main.storage.get(int(self._account_number)).value
+            fund_balance = account.get_fund(int(self._fund_type)).get_balance()
+            # print("\tBalance Before:\t", fund_balance)
+            if fund_balance >= self._amount:
+                # TODO decrease account.amount by transaction._amount
+                account.get_fund(int(self._fund_type)).change_balance(-abs(self._amount))
+                # print("\tBalance After:\t", account.get_fund(int(self._fund_type)).get_balance())
+            else:
+                print("You do not have enough funds.")
+
+        if self._command_type == "T":
+            # locate account in BST
+            account1 = main.storage.get(int(self._account_number)).value
+            print(account1)
+            # locate account2 in BST
+            if main.storage.get(self._account2_number) is not None:
+                account2 = main.storage.get(int(self._account2_number)).value
+            else:
+                print(f"Account {self._account2_number} not found.")
+
+            # if account.amount > self.amount:
+            #     # TODO decrease account.amount by transaction._amount
+            #     # TODO increase account2.amount by transaction._amount
+            # else:
+            #     # handling shared money market fund overdraws
+            #     if account.amount > self.amount:
+            #         # TODO decrease transaction._amount by account.amount
+            #         # TODO set account.amount to $0
+            #         # TODO decrease OTHER MM fund account.amount by self._amount
+            #         # TODO increase account2.amount by self._amount
+            #     else:
+            #         print("You do not have enough funds.")
         #
         # if self._command_type == "H":
         #     # TODO print history

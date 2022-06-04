@@ -8,6 +8,8 @@
 # key = account number
 # value = account object
 class Node:
+    import account
+
     def __init__(self, key, value=None):
         self.key = key
         self.value = value
@@ -37,7 +39,7 @@ class BST:
         while current_node is not None:
             if current_node.key == key:
                 return current_node.value
-            elif current_node.key > key:
+            elif current_node.key > int(key):
                 current_node = current_node.left_child
             else:
                 current_node = current_node.right_child
@@ -56,7 +58,7 @@ class BST:
             if current_node.key == key:
                 current_node.value = value
                 return False
-            elif current_node.key > key:
+            elif current_node.key > int(key):
                 if current_node.left_child is None:
                     new_node = Node(key, value)
                     current_node.left_child = new_node

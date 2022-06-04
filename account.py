@@ -44,11 +44,20 @@ class Account:
     def display(self):
         print(self._number, self._first_name, self._last_name)
 
+    def get_fund(self, fund_number: int):
+        return self._funds[fund_number]
+
     def find_fund(self, fund_number: int):
-        if fund_number in self._funds.get_type():
+        if fund_number in self._funds:
             return True
         else:
             return False
+
+    def add_fund(self, fund: Fund):
+        self._funds.append(fund)
+
+    def remove_fund(self, fund: Fund):
+        self._funds.remove(fund)
 
     # string overload
     def __str__(self):

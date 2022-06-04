@@ -12,11 +12,10 @@ class Fund:
     def __init__(self,
                  account_number: int = 0000,
                  fund_type: int = 0,
-                 balance: decimal = 0):
+                 balance: float = 0):
         self._type = fund_type
         self._account_number = account_number
-        self._balance = balance
-
+        self._balance = float(balance)
 
     def get_type(self):
         return self._type
@@ -29,10 +28,11 @@ class Fund:
         return self._balance
 
     # updates the balance based on negative or positive input
-    def change_balance(self, value: decimal):
+    def change_balance(self, value: float):
         # TODO check for money market fund
         # negative balance error handling
-        if self._balance + value > 0:
+        difference = int(self._balance + value)
+        if difference > 0:
             self._balance += value
             return True
         else:

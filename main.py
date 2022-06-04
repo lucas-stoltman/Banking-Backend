@@ -25,9 +25,6 @@ if __name__ == "__main__":
         transaction.transact(command)
         # transaction.print_debug()
 
-    # TODO while queue !empty
-    #   process first command
-
     # TODO When the queue has been
     #  depleted the program will print
     #  out all open accounts and balances
