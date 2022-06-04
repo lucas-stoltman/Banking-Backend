@@ -4,6 +4,7 @@ from account import Account
 from fund import Fund
 from command_storage import CommandStorage
 from transaction import Transaction
+from account_storage import Node, BST
 
 acc = Account()
 
@@ -25,13 +26,14 @@ fund1.display()
 fund2 = Fund(acc.get_number(), 3, 69)
 fund2.display()
 
-print("\n-------------------------------")
-
-cmd = CommandStorage()
-
-for i in range(cmd.get_size()):
-    transaction = Transaction()
-    transaction.parse(cmd.get_command())
-    transaction.print_debug()
-    print("\n")
+# --- transaction testing ---
+# print("\n---\033[1m", "transaction testing", "\033[0m---", )
+#
+# cmd = CommandStorage()
+#
+# for i in range(cmd.get_size()):
+#     transaction = Transaction()
+#     transaction.parse(cmd.get_command())
+#     transaction.print_debug()
+#     print("\n")
 

@@ -10,8 +10,8 @@ class Account:
     # Constructor
     def __init__(self,
                  account_number: int = 1000,
-                 first_name: string = "Alan",
-                 last_name: string = "Turing"):
+                 last_name: string = "Turing",
+                 first_name: string = "Alan"):
         self._number = account_number
         self._first_name = first_name
         self._last_name = last_name
@@ -51,4 +51,4 @@ class Account:
     # repr overload
     def __repr__(self):
         return "{self.__class__.__name__}({self._number}, " \
-               "{self._first_name}, {self._last_name})".format(self=self)
+               "{self._last_name}, {self._first_name})".format(self=self)

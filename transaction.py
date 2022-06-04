@@ -5,9 +5,9 @@ class Transaction:
     _command = []
     _command_type = None
     _account_number = None
-    _account_type = None
+    _fund_type = None
     _account2_number = None
-    _account2_type = None
+    _fund2_type = None
     _last_name = None
     _first_name = None
     _amount = 0
@@ -32,30 +32,29 @@ class Transaction:
             account_number_long = self._command[1]
             if len(account_number_long) > 5:
                 print("Account number is too long.")
-            if len(account_number_long) == 5:
+            elif len(account_number_long) == 5:
                 self._account_number = account_number_long[0:4]
-                self._account_type = account_number_long[4]
+                self._fund_type = account_number_long[4]
             else:
                 self._account_number = account_number_long
 
             if self._command_type == "D":
                 print("Deposit")
                 self._amount = self._command[2]
-
-            if self._command_type == "W":
+            elif self._command_type == "W":
                 print("Withdraw")
                 self._amount = self._command[2]
-
-            if self._command_type == "T":
+            elif self._command_type == "T":
                 print("Transfer")
                 self._amount = self._command[2]
                 account2_number_long = self._command[3]
                 self._account2_number = account2_number_long[:-1]
-                self._account2_type = account2_number_long[-1:]
-
-            if self._command_type == "H":
+                self._fund2_type = account2_number_long[-1:]
+            elif self._command_type == "H":
                 print("History")
                 self._account_number = self._command[1]
+            else:
+                print("Unrecognized command.")
 
     # # TODO performs the transaction
     # def transact(self, command: string = ""):
@@ -67,12 +66,12 @@ class Transaction:
     #
     #     if self._command_type == "D":
     #         # TODO locate account in BST
-    #         # TODO increase amount by self._amount
+    #         # TODO increase account.amount by transaction._amount
     #
     #     if self._command_type == "W":
     #         # TODO locate account in BST
     #         if account.amount > self.amount:
-    #             # TODO decrease amount by self._amount
+    #             # TODO decrease account.amount by transaction._amount
     #         else:
     #             print("You do not have enough funds.")
     #
@@ -80,15 +79,15 @@ class Transaction:
     #         # TODO locate account in BST
     #         # TODO locate account2 in BST
     #         if account.amount > self.amount:
-    #             # TODO decrease amount by self._amount
-    #             # TODO increase account2 by self._amount
+    #             # TODO decrease account.amount by transaction._amount
+    #             # TODO increase account2.amount by transaction._amount
     #         else:
     #             # handling shared money market fund overdraws
     #             if account.amount > self.amount:
-    #                 # TODO decrease self._amount by amount
-    #                 # TODO set amount to $0
-    #                 # TODO decrease OTHER MM fund amount by self._amount
-    #                 # TODO increase account2 by self._amount
+    #                 # TODO decrease transaction._amount by account.amount
+    #                 # TODO set account.amount to $0
+    #                 # TODO decrease OTHER MM fund account.amount by self._amount
+    #                 # TODO increase account2.amount by self._amount
     #             else:
     #                 print("You do not have enough funds.")
     #
@@ -107,11 +106,11 @@ class Transaction:
             print("First Name:", self._first_name)
         if self._account_number:
             print("Account Number:", self._account_number)
-        if self._account_type:
-            print("Account Type:", self._account_type)
+        if self._fund_type:
+            print("Fund Type:", self._fund_type)
         if self._amount:
             print("Amount:", f"${self._amount}")
         if self._account2_number:
             print("Account2 Number:", self._account2_number)
-        if self._account2_type:
-            print("Account2 Type:", self._account2_type)
+        if self._fund2_type:
+            print("Fund2 Type:", self._fund2_type)
