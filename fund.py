@@ -6,6 +6,7 @@
 
 class Fund:
     import decimal
+    import account
 
     # constructor
     def __init__(self,
@@ -15,6 +16,7 @@ class Fund:
         self._type = fund_type
         self._account_number = account_number
         self._balance = balance
+
 
     def get_type(self):
         return self._type

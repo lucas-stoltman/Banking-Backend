@@ -5,12 +5,6 @@
 # Version: 1.0
 
 # TODO BST to store accounts
-# class AccountStorage:
-
-# A utility class that represents
-# an individual node in a BST
-# Node which has key/value and two children # All data members are public
-
 # key = account number
 # value = account object
 class Node:

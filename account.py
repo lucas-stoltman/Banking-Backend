@@ -6,6 +6,7 @@
 
 class Account:
     import string
+    from fund import Fund
 
     # Constructor
     def __init__(self,
@@ -15,6 +16,7 @@ class Account:
         self._number = account_number
         self._first_name = first_name
         self._last_name = last_name
+        self._funds = []
 
     # Setters/Getters
     def get_number(self):
@@ -41,6 +43,12 @@ class Account:
     # functions
     def display(self):
         print(self._number, self._first_name, self._last_name)
+
+    def find_fund(self, fund_number: int):
+        if fund_number in self._funds.get_type():
+            return True
+        else:
+            return False
 
     # string overload
     def __str__(self):
