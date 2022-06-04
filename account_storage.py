@@ -23,8 +23,14 @@ class Node:
     def is_leaf(self):
         return self.left_child is None and self.right_child is None
 
+    # debug function
+    def print(self):
+        print("Value:", self.value)
+        print("Left:", self.left_child)
+        print("Right:", self.right_child)
+
     def __str__(self):
-        return str(self.key) + " " + str(self.value)
+        return str(self.key) + " [" + str(self.value) + "]"
 
 
 class BST:
@@ -50,12 +56,12 @@ class BST:
         if self.is_empty():
             self._root = Node(key, value)
             self._count = 1
-            return
+            return True
         current_node = self._root
         while True:
             if current_node.key == key:
                 current_node.value = value
-                return
+                return False
             elif current_node.key > key:
                 if current_node.left_child is None:
                     new_node = Node(key, value)
@@ -71,6 +77,7 @@ class BST:
                 else:
                     current_node = current_node.right_child
         self._count += 1
+        return True
 
     def __setitem__(self, key, data):
         self.put(key, data)
