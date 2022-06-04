@@ -99,14 +99,17 @@ class Transaction:
                 print("You do not have enough funds.")
 
         if self._command_type == "T":
-            # locate account in BST
+            # locate account1 in BST
             account1 = main.storage.get(int(self._account_number)).value
-            print(account1)
             # locate account2 in BST
             if main.storage.get(self._account2_number) is not None:
                 account2 = main.storage.get(int(self._account2_number)).value
+                # remove money from first fund
+                account1.get_fund(int(self._fund_type)).change_balance(-abs(self._amount))
+                # add money to second fund
+                account2.get_fund(int(self._fund2_type)).change_balance(self._amount)
             else:
-                print(f"Account {self._account2_number} not found.")
+                print(f"Account {self._account2_number}{self._fund2_type} not found.")
 
             # if account.amount > self.amount:
             #     # TODO decrease account.amount by transaction._amount

@@ -4,7 +4,7 @@
 # CSS 340 A, Dimpsey
 # Version: 1.0
 
-# TODO BST to store accounts
+# BST to store accounts
 # key = account number
 # value = account object
 class Node:
